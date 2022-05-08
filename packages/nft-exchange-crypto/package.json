@@ -1,0 +1,71 @@
+{
+    "name": "@caurihub/nft-exchange-crypto",
+    "version": "1.0.1",
+    "description": "Transaction Builders For Exchange NFT Transaction Types",
+    "license": "CC-BY-NC-SA-4.0",
+    "homepage": "https://docs.caurihub.com/nft/",
+    "bugs": {
+        "url": "https://github.com/caurihub/nft-plugins/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/caurihub/nft-plugins.git"
+    },
+    "keywords": [
+        "caurihub",
+        "cauri",
+        "core",
+        "sdk",
+        "nft",
+        "blockchain"
+    ],
+    "contributors": [
+        "Arsel Tindo <Arsel Tindo <tindo@cauri.cm>",
+        "Žan Kovač <zan@protokol.com",
+        "Amadej Pevec <amadej@protokol.com>",
+        "Kristjan Košič <kristjan@protokol.com>"
+    ],
+    "files": [
+        "dist"
+    ],
+    "main": "dist/index",
+    "types": "dist/index",
+    "scripts": {
+        "build": "yarn clean && tsc",
+        "build:watch": "yarn build -w",
+        "build:docs": "typedoc --out docs src",
+        "clean": "rimraf .coverage dist tmp",
+        "test": "jest",
+        "test:watch": "jest --watchAll",
+        "coverage:report": "codecov",
+        "test:unit": "jest __tests__/unit/** --forceExit",
+        "test:unit:coverage": "jest __tests__/unit --coverage",
+        "publish:beta": "yarn build && yarn npm publish --tag beta --access public --tolerate-republish",
+        "publish": "yarn build && yarn npm publish --access public --tolerate-republish"
+    },
+    "dependencies": {
+        "@caurihub/core-nft-crypto": "workspace:packages/core-nft-crypto",
+        "@caurihub/utils": "^1.0.0",
+        "@cauriland/crypto": "^3.2.0",
+        "bytebuffer": "^5.0.1"
+    },
+    "devDependencies": {
+        "@cauriland/core-test-framework": "^3.2.0",
+        "@sindresorhus/tsconfig": "~2.0.0",
+        "@types/jest": "~27.5.0",
+        "@types/node": "^17.0.31",
+        "@types/rimraf": "^3.0.2",
+        "codecov": "^3.8.2",
+        "cross-env": "^7.0.3",
+        "jest": "~28.1.0",
+        "jest-extended": "2.0.0",
+        "rimraf": "^3.0.2",
+        "ts-jest": "~28.0.1",
+        "typedoc": "~0.22.15",
+        "typescript": "~4.6.4",
+        "util": "^0.12.4"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}
