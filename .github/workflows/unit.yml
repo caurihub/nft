@@ -1,0 +1,101 @@
+name: UNIT-TESTS
+
+on:
+    push:
+        branches:
+            - "master"
+            - "develop"
+    pull_request:
+        types: [ready_for_review, synchronize, opened]
+
+jobs:
+    unit:
+        name: UNIT (API, CRYPTO, TRANSACTIONS)
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [12.x]
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v2
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Install And Build
+              run: yarn && yarn build
+
+            - name: CORE-NFT-CRYPTO
+              run: cd packages/core-nft-crypto && yarn test:unit:coverage --maxWorkers=2
+
+            - uses: codecov/codecov-action@v2
+              with:
+                directory: packages/core-nft-crypto/.coverage
+                flags: core-nft-crypto
+                verbose: true
+
+            - name: BASE-CRYPTO
+              run: cd packages/nft-base-crypto && yarn test:unit:coverage --maxWorkers=2
+
+            - uses: codecov/codecov-action@v2
+              with:
+                  directory: packages/nft-base-crypto/.coverage
+                  flags: nft-base-crypto
+                  verbose: true
+
+            - name: EXCHANGE-CRYPTO
+              run: cd packages/nft-exchange-crypto && yarn test:unit:coverage --maxWorkers=2
+
+            - uses: codecov/codecov-action@v2
+              with:
+                directory: packages/nft-exchange-crypto/.coverage
+                flags: nft-exchange-crypto
+                verbose: true
+
+            - name: BASE-TRANSACTIONS
+              run: cd packages/nft-base-transactions && yarn test:unit:coverage --maxWorkers=2
+
+            - uses: codecov/codecov-action@v2
+              with:
+                directory: packages/nft-base-transactions/.coverage
+                flags: nft-base-transactions
+                verbose: true
+
+            - name: EXCHANGE-TRANSACTIONS
+              run: cd packages/nft-exchange-transactions && yarn test:unit:coverage --maxWorkers=2
+
+            - uses: codecov/codecov-action@v2
+              with:
+                directory: packages/nft-exchange-transactions/.coverage
+                flags: nft-exchange-transactions
+                verbose: true
+
+            - name: BASE-API
+              run: cd packages/nft-base-api && yarn test:unit:coverage --maxWorkers=2
+
+            - uses: codecov/codecov-action@v2
+              with:
+                directory: packages/nft-base-api/.coverage
+                flags: nft-base-api
+                verbose: true
+
+            - name: EXCHANGE-API
+              run: cd packages/nft-exchange-api && yarn test:unit:coverage --maxWorkers=2
+
+            - uses: codecov/codecov-action@v2
+              with:
+                directory: packages/nft-exchange-api/.coverage
+                flags: nft-exchange-api
+                verbose: true
+
+            - name: INDEXER-API
+              run: cd packages/nft-indexer-api && yarn test:unit:coverage --maxWorkers=2
+
+            - uses: codecov/codecov-action@v2
+              with:
+                directory: packages/nft-indexer-api/.coverage
+                flags: nft-indexer-api
+                verbose: true
