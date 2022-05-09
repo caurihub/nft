@@ -1,6 +1,6 @@
 {
     "name": "@caurihub/nft-base-crypto",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "description": "Transaction Builders For Base NFT Transaction Types",
     "license": "CC-BY-NC-SA-4.0",
     "homepage": "https://docs.caurihub.com/nft/",
@@ -44,7 +44,7 @@
         "publish": "yarn build && yarn npm publish --access public --tolerate-republish"
     },
     "dependencies": {
-        "@caurihub/core-nft-crypto": "workspace:packages/core-nft-crypto",
+        "@caurihub/core-nft-crypto": "1.0.3",
         "@caurihub/utils": "^1.0.0",
         "@cauriland/crypto": "^3.2.0",
         "bytebuffer": "^5.0.1"
